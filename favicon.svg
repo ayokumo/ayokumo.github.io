@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AL">
+  <rect width="64" height="64" rx="14" fill="#1f5d50"/>
+  <text x="32" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="#ffffff" letter-spacing="-1">AL</text>
+  <rect x="17" y="49" width="30" height="3" rx="1.5" fill="#7fd1b9"/>
+</svg>
