@@ -8,12 +8,12 @@
 <meta name="theme-color" content="#0f1b2a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#faf7f2; --surface:#ffffff; --ink:#1b2430; --muted:#5b6675; --line:#e6e0d6;
   --accent:#1f5d50; --accent-ink:#ffffff; --tag:#efe9dd;
-  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  --serif:'Fraunces',Georgia,serif; --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace; --sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
 }
 :root[data-theme="dark"]{
   --bg:#0f1b2a; --surface:#16263a; --ink:#e9eef5; --muted:#9fb0c3; --line:#243750;
@@ -53,16 +53,27 @@ section{padding:44px 0;border-top:1px solid var(--line)}
 h2{font:600 28px/1.2 var(--serif);margin:0 0 6px}
 .kicker{color:var(--muted);margin:0 0 24px;font-size:15px}
 .about p{max-width:38em}
-.proj{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;margin:0 0 18px}
-.proj h3{font:600 21px/1.25 var(--serif);margin:0 0 4px}
-.proj .meta{color:var(--muted);font-size:14px;margin:0 0 12px}
-.proj p{margin:0 0 10px}
-.proj ul{margin:0 0 12px;padding-left:20px}
-.proj li{margin:0 0 4px}
-.tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-.tags span{background:var(--tag);border-radius:999px;padding:2px 10px;font-size:13px;color:var(--ink)}
+.proj{display:grid;grid-template-columns:150px 1fr;gap:6px 28px;padding:28px 0;border-top:1px solid var(--line)}
+.proj:first-of-type{border-top:none;padding-top:8px}
+.proj .side{font:400 14px/1.5 var(--mono);color:var(--muted)}
+.proj .side .when{color:var(--ink);display:block;margin-bottom:6px}
+.chip{display:inline-block;margin-top:10px;background:var(--tag);color:var(--accent);border-radius:6px;padding:3px 9px;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.proj h3{font:600 23px/1.25 var(--sans);margin:0 0 2px;letter-spacing:-.01em}
+.proj .role{font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.proj p.sum{margin:0 0 14px;font-size:18px;color:var(--muted)}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;padding:0;list-style:none}
+.pills li{border:1px solid var(--line);border-radius:999px;padding:3px 12px;font:400 13px var(--mono);color:var(--ink)}
+details.did{margin:0 0 14px}
+details.did summary{cursor:pointer;font:600 14px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);list-style:none;padding:6px 0}
+details.did summary::-webkit-details-marker{display:none}
+details.did summary::before{content:"\25B8";display:inline-block;margin-right:8px;transition:transform .15s}
+details.did[open] summary::before{transform:rotate(90deg)}
+details.did ul{margin:10px 0 0;padding:0;list-style:none}
+details.did li{position:relative;padding-left:20px;margin:0 0 14px}
+details.did li::before{content:"";position:absolute;left:2px;top:.72em;width:7px;height:7px;border-radius:50%;background:var(--muted);opacity:.7}
+details.did li b{font-weight:600}
 .links{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:500}
-.note{border-left:3px solid var(--accent);padding:2px 0 2px 14px;color:var(--muted);margin:14px 0 0;font-size:15px}
+.note{border-left:3px solid var(--accent);padding:2px 0 2px 14px;color:var(--muted);margin:4px 0 14px;font-size:15px}
 .job{display:grid;grid-template-columns:150px 1fr;gap:6px 24px;margin:0 0 26px}
 .job .when{color:var(--muted);font-size:15px}
 .job h3{font:600 18px var(--sans);margin:0}
@@ -78,6 +89,7 @@ h2{font:600 28px/1.2 var(--serif);margin:0 0 6px}
 footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--muted);font-size:15px}
 .contact a{display:block;margin:0 0 6px;font-size:18px}
 @media (max-width:640px){
+  .proj{grid-template-columns:1fr}
   .hero{grid-template-columns:1fr;gap:20px;padding-top:40px}
   .job{grid-template-columns:1fr}
   header.top{position:static}
@@ -125,73 +137,132 @@ footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--muted);f
 
   <section id="work">
     <h2>Work</h2>
-    <p class="kicker">Four projects. Each one links to the code and to the measured results.</p>
-
+    <p class="kicker">Four projects. Open What I did for the situation, task, action and result. Each links to the code and the measured results.</p>
     <article class="proj">
-      <h3>Football player undervaluation model with a RAG scouting assistant</h3>
-      <p class="meta">Python, scikit-learn, PyTorch, LangChain, LangGraph, PostgreSQL, Docker, AWS</p>
-      <p>The question: which players who moved from nine leagues outside the top five into a top five club were undervalued at the time, judged only on what was known before the move?</p>
-      <ul>
-        <li>1,669 usable pre transfer records in PostgreSQL. I started from 1,725 moves and dropped 56 with no appearances in the prior year.</li>
-        <li>Logistic regression, gradient boosting and a PyTorch MLP all beat a constant baseline. They beat a simple minutes rule by only about 0.03 to 0.04 AUC, so I do not claim they are clearly better.</li>
-        <li>The shortlist cuts a league of 170 to 300 eligible players to 100 names. In a backtest, the top 20% by predicted probability became regular starters 56.7% of the time, against a 30.9% base rate.</li>
-        <li>A LangGraph and LangChain agent routes scouting questions to stats or reports. On a held out set of 10 questions it answered 9 correctly, and 10 of 10 on the questions I tuned on. Ten questions is a small test and the README says how wide that interval is.</li>
-        <li>I added computer vision on event maps. It did not improve accuracy on the main benchmark, and it only helped on questions that could be answered from the maps alone. The write up includes how often the vision tags disagreed with the event data.</li>
-        <li>Packaged in Docker and run on a small AWS server.</li>
-      </ul>
-      <div class="links">
-        <a href="https://github.com/ayokumo/player_undervaluation_model">Code and results</a>
-        <!-- DEMO LINK: uncomment after checking it works on a phone on mobile data
-        <a href="http://3.135.18.66">Live demo</a>
-        -->
+      <div class="side"><span class="when">2026</span><span class="chip">Sports analytics</span></div>
+      <div>
+        <h3>Football player undervaluation model with a RAG scouting assistant</h3>
+        <p class="role">Built end to end</p>
+        <p class="sum">A model that flags players who moved into a top five league and may have been undervalued, plus a chat assistant a scout can ask about them. It cuts a league down to a shortlist of 100 names.</p>
+        <ul class="pills">
+          <li>Python</li>
+          <li>scikit-learn</li>
+          <li>PyTorch</li>
+          <li>PostgreSQL</li>
+          <li>LangChain</li>
+          <li>LangGraph</li>
+          <li>Docker</li>
+          <li>AWS</li>
+        </ul>
+        <details class="did" open>
+          <summary>What I did</summary>
+          <ul>
+            <li><b>Situation:</b> A scout has to look through a whole league, 170 to 300 eligible players, to find who might be worth a closer look.</li>
+            <li><b>Task:</b> Build a model that only uses what was known before each transfer, and an assistant that answers scouting questions with sources.</li>
+            <li><b>Action:</b> Put 1,725 moves from nine leagues into the top five into PostgreSQL. I dropped 56 with no appearances in the year before, which left 1,669 usable records.</li>
+            <li><b>Action:</b> Trained logistic regression, gradient boosting and a PyTorch neural network. The neural network scored best on validation (AUC 0.764), so it ranks the shortlist.</li>
+            <li><b>Action:</b> Built a LangGraph and LangChain agent that sends each question to stats or to written reports, and answers with citations. Packaged it in Docker and ran it on a small AWS server.</li>
+            <li><b>Action:</b> Added computer vision on maps of past player actions to see whether it made answers better.</li>
+            <li><b>Result:</b> In a backtest, the top 20% by predicted probability became regular starters 56.7% of the time, against a 30.9% base rate. The models beat a constant guess clearly but beat a simple minutes played rule by only about 0.03 to 0.04 AUC, so I do not claim they are clearly better.</li>
+            <li><b>Result:</b> The assistant answered 9 of 10 held out questions correctly and cited real sources every time. Ten questions is a small test, and the README shows how wide the interval is.</li>
+            <li><b>Result:</b> Vision did not improve accuracy on the main benchmark. It only helped on questions that could be answered from the maps alone.</li>
+          </ul>
+        </details>
+        <p class="note">Limit: market value is Transfermarkt's estimate and fees are not used, so undervalued is not proven by this data.</p>
+        <div class="links">
+          <a href="https://github.com/ayokumo/player_undervaluation_model">Code and results</a>
+          <!-- DEMO LINK: uncomment after checking it works on a phone on mobile data
+          <a href="http://3.135.18.66">Live demo</a>
+          -->
+        </div>
       </div>
-      <p class="note">Limits: market value is Transfermarkt's estimate and fees are not used, so "undervalued" is not proven by this data.</p>
     </article>
-
     <article class="proj">
-      <h3>Premier League match prediction pipeline</h3>
-      <p class="meta">Python, PySpark, scikit-learn, GitHub Actions</p>
-      <p>A pipeline that refreshes fixtures, form and standings on a schedule and publishes predictions to a live dashboard. A weekly job rebuilds the PySpark features, reruns the validation and writes new predictions every Monday.</p>
-      <ul>
-        <li>Form features from each team's previous 5 matches, built in PySpark so a match never sees its own result.</li>
-        <li>Logistic regression and gradient boosting, validated season by season, always training on earlier seasons only. Five test seasons from 2021/22 to 2025/26.</li>
-        <li>Logistic regression scored between 47.5% and 54.7% a season, 49.9% over all five. Always picking the home team scored between 41.1% and 48.3%, 44.2% over all five.</li>
-        <li>With 375 matches a season, one standard error is about 2.5 points, so most season to season differences are noise. A simple weighted model I wrote by hand is roughly as good.</li>
-      </ul>
-      <div class="links">
-        <a href="https://github.com/ayokumo/pl-predictor">Code and results</a>
-        <a href="https://ayokumo.github.io/pl-predictor/">Live dashboard</a>
+      <div class="side"><span class="when">2026</span><span class="chip">Sports analytics</span></div>
+      <div>
+        <h3>Premier League match prediction pipeline</h3>
+        <p class="role">Built end to end</p>
+        <p class="sum">A pipeline that refreshes fixtures and form on a schedule, predicts upcoming matches and publishes them to a live dashboard. A weekly job retrains and checks the model against past seasons.</p>
+        <ul class="pills">
+          <li>Python</li>
+          <li>PySpark</li>
+          <li>scikit-learn</li>
+          <li>GitHub Actions</li>
+        </ul>
+        <details class="did">
+          <summary>What I did</summary>
+          <ul>
+            <li><b>Situation:</b> I had a weighted model I wrote by hand to predict matches, and no check of how it did on past seasons.</li>
+            <li><b>Task:</b> Add a trained model, test it honestly against a simple baseline, and keep the whole thing running without me.</li>
+            <li><b>Action:</b> Built the form features in PySpark from each team's previous 5 matches, so a match never sees its own result.</li>
+            <li><b>Action:</b> Trained logistic regression and gradient boosting, always on earlier seasons only, and tested on 5 seasons from 2021/22 to 2025/26.</li>
+            <li><b>Action:</b> Scheduled it on GitHub Actions: daily, hourly on match days, and a weekly run on Mondays that rebuilds the features, retests the model and writes new predictions. Fixed a bug where recent results were fed to the old model in the wrong order.</li>
+            <li><b>Result:</b> Logistic regression scored between 47.5% and 54.7% a season, 49.9% over all five. Always picking the home team scored between 41.1% and 48.3%, 44.2% over all five.</li>
+            <li><b>Result:</b> With 375 matches a season, one standard error is about 2.5 points, so most season to season differences are noise. My hand written weighted model is roughly as good, which I report as it is.</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/ayokumo/pl-predictor">Code and results</a>
+          <a href="https://ayokumo.github.io/pl-predictor/">Live dashboard</a>
+        </div>
       </div>
     </article>
-
     <article class="proj">
-      <h3>Toronto housing and shelter forecasting pipeline</h3>
-      <p class="meta">dbt Core, DuckDB, Python, statsmodels</p>
-      <p>Do Bank of Canada rate changes show up in Toronto shelter demand? I built a tested dbt and DuckDB warehouse from five public sources (a 433K row fact table with 26 automated tests) and looked at the link.</p>
-      <ul>
-        <li>In the regression, occupancy rose about 0.64 percentage points for every 1% rate increase, roughly six months later.</li>
-        <li>The shelter system sits near 98% full, so a plain "same as last period" forecast is very hard to beat. SARIMA and Prophet did not beat it.</li>
-        <li>I also tested a monthly model with the policy rate as an input, lagged 6 months. On the held out period it did not reduce error: it was 0.6% worse than the naive forecast, with a mean absolute error of 0.425 percentage points against 0.422.</li>
-      </ul>
-      <div class="links">
-        <a href="https://github.com/ayokumo/toronto-housing-project">Code and results</a>
+      <div class="side"><span class="when">2026</span><span class="chip">Public data</span></div>
+      <div>
+        <h3>Toronto housing and shelter forecasting pipeline</h3>
+        <p class="role">Built end to end</p>
+        <p class="sum">A tested data warehouse that links Bank of Canada interest rates to Toronto shelter occupancy, with forecasts on top. The main finding is that shelters are so full that forecasting adds little.</p>
+        <ul class="pills">
+          <li>dbt Core</li>
+          <li>DuckDB</li>
+          <li>Python</li>
+          <li>statsmodels</li>
+        </ul>
+        <details class="did">
+          <summary>What I did</summary>
+          <ul>
+            <li><b>Situation:</b> Toronto shelters run close to 98% full. I wanted to know if interest rate changes show up in shelter demand.</li>
+            <li><b>Task:</b> Build a reliable data foundation, then test whether the rate helps forecast occupancy better than simply repeating the last period.</li>
+            <li><b>Action:</b> Pulled five public sources into a dbt and DuckDB warehouse: a 433K row fact table with 26 automated tests.</li>
+            <li><b>Action:</b> Ran a regression, then SARIMA and Prophet forecasts against a naive baseline.</li>
+            <li><b>Action:</b> Added a monthly model with the policy rate as an input, lagged 6 months. I fixed that lag before running it and judged it on a held out period from 2024 onward.</li>
+            <li><b>Result:</b> Occupancy rose about 0.64 percentage points for every 1% rate increase, roughly six months later.</li>
+            <li><b>Result:</b> The forecasts did not beat the naive baseline. The rate model was 0.6% worse, with an average error of 0.425 percentage points against 0.422. A full system leaves little to predict, and that is the finding.</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/ayokumo/toronto-housing-project">Code and results</a>
+        </div>
       </div>
-      <p class="note">A null result, written up as one. The system being full is the finding.</p>
     </article>
-
     <article class="proj">
-      <h3>Toronto shelter overdose spatial analysis</h3>
-      <p class="meta">Python, geopandas, PySAL, scikit-learn</p>
-      <p>A companion to the housing project. What predicts where overdoses happen across Toronto's 158 neighbourhoods?</p>
-      <ul>
-        <li>Low income prevalence explained most of the apparent geographic clustering.</li>
-        <li>A machine learning layer cut cross validated error from about 52 to about 33 incidents per neighbourhood.</li>
-        <li>Density based clustering found 6 clusters at settings I fixed before running it. Across a grid of settings it found anywhere from 1 to 9, so the count depends on the settings and I do not treat it as a fixed number. Local Moran's I found one contiguous hotspot group of 9 neighbourhoods.</li>
-        <li>About 84% of incidents could be geocoded. The rest are left out and the README says so.</li>
-      </ul>
-      <div class="links">
-        <a href="https://github.com/ayokumo/toronto-overdose-spatial">Code and results</a>
-        <a href="https://ayokumo.github.io/toronto-overdose-spatial/overdose_map.html">Interactive map</a>
+      <div class="side"><span class="when">2026</span><span class="chip">Public health</span></div>
+      <div>
+        <h3>Toronto shelter overdose spatial analysis</h3>
+        <p class="role">Built end to end</p>
+        <p class="sum">A companion to the housing project that asks what predicts where overdoses happen across Toronto's 158 neighbourhoods, and whether the clusters are real.</p>
+        <ul class="pills">
+          <li>Python</li>
+          <li>geopandas</li>
+          <li>PySAL</li>
+          <li>scikit-learn</li>
+        </ul>
+        <details class="did">
+          <summary>What I did</summary>
+          <ul>
+            <li><b>Situation:</b> Overdoses in Toronto shelters looked clustered on a map, which could guide where outreach goes.</li>
+            <li><b>Task:</b> Find out what actually explains where they happen, and whether the clusters hold up.</li>
+            <li><b>Action:</b> Matched shelter addresses to neighbourhoods. I could place 114 of 151 addresses, which cover about 84% of incidents. The rest are left out and the README says so.</li>
+            <li><b>Action:</b> Used regression with neighbourhood income, then a machine learning layer, then density clustering and a hotspot test (Local Moran's I).</li>
+            <li><b>Result:</b> Low income prevalence explained most of the apparent clustering. The machine learning layer cut cross validated error from about 52 to about 33 incidents per neighbourhood.</li>
+            <li><b>Result:</b> Clustering found 6 clusters at settings I fixed before running it, but anywhere from 1 to 9 across other settings, so I do not treat the count as fixed. The hotspot test found one connected group of 9 neighbourhoods.</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/ayokumo/toronto-overdose-spatial">Code and results</a>
+          <a href="https://ayokumo.github.io/toronto-overdose-spatial/overdose_map.html">Interactive map</a>
+        </div>
       </div>
     </article>
   </section>
